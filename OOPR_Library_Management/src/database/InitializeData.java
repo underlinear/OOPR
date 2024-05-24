@@ -82,7 +82,7 @@ public class InitializeData extends MySQLConnection{
 		        "('To Kill a Mockingbird', 'Harper Lee', 10, 10, '1960-07-11', 'Fiction'), " +
 		        "('War and Peace', 'Leo Tolstoy', 15, 15, '1869-01-01', 'Fiction'), " +
 		        "('Wuthering Heights', 'Emily Brontë', 7, 7, '1847-12-01', 'Fiction'), " +
-		        "('You Don’t Know JS', 'Kyle Simpson', 10, 10, '2014-12-28', 'Programming');";
+		        "('You Don’t Know JS', 'Kyle Simpson', 1, 0, '2014-12-28', 'Programming');";
 
 		Statement stmt = conn.createStatement();
 		stmt.execute(query);

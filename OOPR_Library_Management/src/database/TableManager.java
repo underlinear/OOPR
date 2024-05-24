@@ -43,7 +43,7 @@ public class TableManager extends MySQLConnection{
 	public void createUsersTable() throws SQLException {
 		String query = "CREATE TABLE Users ("
 			    + "user_id INT AUTO_INCREMENT PRIMARY KEY, "
-			    + "email VARCHAR(30), "
+			    + "email VARCHAR(100), "
 			    + "password VARCHAR(128), "
 			    + "user_type VARCHAR(10 ), "
 			    + "student_number VARCHAR(20), "

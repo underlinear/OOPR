@@ -479,7 +479,7 @@ public class Student_Home_Page extends JFrame {
         BookRetrieval br = new BookRetrieval();
         List<Book> books = null;
 		try {
-			books = br.fetchBooksFromDatabase();
+			books = br.fetchBooksWithZeroAvailableQuantity();
 		} catch (SQLException e1) {
 			// err
 			e1.printStackTrace();
