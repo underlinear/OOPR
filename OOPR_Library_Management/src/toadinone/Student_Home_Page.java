@@ -170,6 +170,8 @@ public class Student_Home_Page extends JFrame {
 
         Timer timer = new Timer(1000, e -> updateDateTime());
         timer.start();
+        
+        borrowBook();
     }
 
     private void updateDateTime() {
