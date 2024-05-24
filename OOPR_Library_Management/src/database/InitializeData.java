@@ -88,7 +88,7 @@ public class InitializeData extends MySQLConnection{
 		stmt.execute(query);
 		
 		String user = "INSERT INTO Users (email, password, user_type) VALUES"
-					 +"('admin@toadinone.com', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin');";
+					 +"('root@admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin');";
 		stmt.execute(user);
 		
 		String insertQuery = "INSERT INTO Students (student_number, first_name, last_name, middle_name, year_level, section, program_id) VALUES "

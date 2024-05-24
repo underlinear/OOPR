@@ -112,7 +112,7 @@ public class Login extends javax.swing.JFrame {
         signInButton.setForeground(new Color(107, 183, 35));
         signInButton.setBackground(Color.WHITE); 
         signInButton.setBorder(BorderFactory.createLineBorder(new Color(107, 173, 35), 2));
-        signInButton.setBounds(200, 370, 100, 30);
+        signInButton.setBounds(200, 330, 100, 30);
         signInButton.setFocusPainted(false);
         
         JLabel failedLabel = new JLabel("");
@@ -155,7 +155,7 @@ public class Login extends javax.swing.JFrame {
         leftPanel.add(passwordLabel);
         leftPanel.add(passwordField);
         leftPanel.add(Box.createVerticalStrut(10));
-        leftPanel.add(rememberCheckBox);
+        // leftPanel.add(rememberCheckBox);
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(signInButton);
         leftPanel.add(Box.createVerticalGlue());

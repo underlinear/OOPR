@@ -605,12 +605,13 @@ public class Student_Home_Page extends JFrame {
         visitPurpose.setBounds(300, 135, 700, 500);
         visitPurpose.setLayout(null);
         
-        JLabel studentID = new JLabel("STUDENT ID");
+        JLabel studentID = new JLabel("Student ID: ");
         studentID.setFont(new Font("Arial", Font.BOLD, 20));
         studentID.setBounds(180, 50, 300, 50);
         
-        JTextField studentIDField = new JTextField("");
-        studentIDField.setBounds(180, 100, 380, 50);
+        JLabel studentIDLabel = new JLabel(User.studentNumber);
+        studentIDLabel.setBounds(180, 100, 380, 50);
+        studentIDLabel.setFont(new Font("Arial", Font.BOLD, 20));
         
         JLabel purpose = new JLabel("Visitation Purpose");
         purpose.setFont(new Font("Arial", Font.BOLD, 20));
@@ -626,14 +627,14 @@ public class Student_Home_Page extends JFrame {
         submitButton.setBounds(315, 320, 100, 50);
         
         submitButton.addActionListener(e -> {
-            String studentIDInput = studentIDField.getText();
+            String studentIDString = User.studentNumber;
             String purposeInput = (String) purposeComboBox.getSelectedItem();
-            System.out.println("Student ID: " + studentIDInput);
+            System.out.println("Student ID: " + studentIDString);
             System.out.println("Purpose: " + purposeInput);
             
             VisitPurpose vp = new VisitPurpose();
             try {
-				vp.insertVisitPurpose(studentIDInput, purposeInput, User.userID);
+				vp.insertVisitPurpose(studentIDString, purposeInput, User.userID);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -641,7 +642,7 @@ public class Student_Home_Page extends JFrame {
         });
         
         visitPurpose.add(studentID);
-        visitPurpose.add(studentIDField);
+        visitPurpose.add(studentIDLabel);
         visitPurpose.add(purpose);
         visitPurpose.add(purposeComboBox);
         visitPurpose.add(submitButton);
