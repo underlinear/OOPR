@@ -266,7 +266,9 @@ public class Student_Home_Page extends JFrame {
                     selectedDataPanel.add(dateLabel);
                     
                     Borrow b = new Borrow(bookName);
-                    b.borrowBook();
+                    if(!b.borrowBook()) {
+                    	JOptionPane.showMessageDialog(null, "This book is unavailable for now.", "Unavailable", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
             }
             

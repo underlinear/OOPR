@@ -15,24 +15,31 @@ public class Borrow extends MySQLConnection{
 	
 	public boolean borrowBook() {
 		
-		String bookIDQuery = "SELECT book_id FROM Books WHERE title = ?";
+		String bookIDQuery = "SELECT book_id, available_quantity FROM Books WHERE title = ?";
 		int bookID = 0;
+		int availableQuantity = 0;
 		
 		try {
-		    PreparedStatement statement = conn.prepareStatement(bookIDQuery);
-		    statement.setString(1, title);
-		    
-		    ResultSet resultSet = statement.executeQuery();
-		    
-		    if (resultSet.next()) {
-		        bookID = resultSet.getInt("book_id");
-		    }
-		    
-		    resultSet.close();
-		    statement.close();
-		} catch (SQLException e) {
-		    e.printStackTrace();
-		}
+	        PreparedStatement statement = conn.prepareStatement(bookIDQuery);
+	        statement.setString(1, title);
+
+	        ResultSet resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {
+	            bookID = resultSet.getInt("book_id");
+	            availableQuantity = resultSet.getInt("available_quantity");
+	        }
+
+	        resultSet.close();
+	        statement.close();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    if (availableQuantity <= 0) {
+	        System.out.println("Sorry, the book is not available for borrowing.");
+	        return false;
+	    }
 		String updateQuery = "UPDATE Books "
                 + "SET available_quantity = available_quantity - 1 "
                 + "WHERE book_id = " + bookID + ";";
