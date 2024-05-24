@@ -131,21 +131,21 @@ public class SignupManager extends MySQLConnection{
     	
     	PasswordHandler ph = new PasswordHandler(password);
     	
-    	if (!isValidEmail(email)) {
+    	if (!isStudentNumberExists(student_number)) {
             return 1;
         }
     	
-    	if (isEmailDuplicate(email)) {
+    	if (!isValidEmail(email)) {
             return 2;
         }
     	
-    	if (!ph.isValidPassword()) {
-    		return 3;
-    	}
-    	
-    	if (!isStudentNumberExists(student_number)) {
-            return 4;
+    	if (isEmailDuplicate(email)) {
+            return 3;
         }
+    	
+    	if (!ph.isValidPassword()) {
+    		return 4;
+    	}
     	
     	
         
