@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -15,10 +16,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+
+import database.PasswordHandler;
+import database.User;
 
 public class ForgotPassword extends JFrame{
+	
+	private String studentNumber;
+	
 	public ForgotPassword() {
 		initComponents();
 		setResizable(false);
@@ -106,7 +116,7 @@ public class ForgotPassword extends JFrame{
         JLabel studentNumberLabel = new JLabel("Enter Student Number:");
         studentNumberLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         studentNumberLabel.setForeground(new Color(102, 102, 102));
-        studentNumberLabel.setBounds(70, 170, 150, 50);
+        studentNumberLabel.setBounds(70, 170, 300, 50);
         
         JTextField studentNumberField = new JTextField(20);
         studentNumberField.setBounds(100, 220, 300, 35);
@@ -116,20 +126,96 @@ public class ForgotPassword extends JFrame{
         loginLabel.setForeground(new Color(107, 173, 35));
         loginLabel.setBounds(115, 50, 480, 50);
         
+        JLabel failedLabel = new JLabel();
+        failedLabel.setBounds(100, 255, 400, 20);
+        failedLabel.setForeground(new Color(216, 30, 0));
+        failedLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        
         JButton sendCodeButton = new JButton("Send code to my email");
         sendCodeButton.setFont(new Font("Arial", Font.PLAIN, 14));
         sendCodeButton.setForeground(new Color(107, 183, 35));
         sendCodeButton.setBackground(Color.WHITE); 
         sendCodeButton.setBorder(BorderFactory.createLineBorder(new Color(107, 173, 35), 2));
-        sendCodeButton.setBounds(140, 300, 200, 30);
+        sendCodeButton.setBounds(140, 280, 200, 30);
         sendCodeButton.setFocusPainted(false);
         
+        JButton verifyButton = new JButton("Verify");
+        verifyButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        verifyButton.setForeground(new Color(107, 183, 35));
+        verifyButton.setBackground(Color.WHITE); 
+        verifyButton.setBorder(BorderFactory.createLineBorder(new Color(107, 173, 35), 2));
+        verifyButton.setBounds(140, 280, 200, 30);
+        verifyButton.setFocusPainted(false);
+        
+        JButton newPasswordButton = new JButton("Set Password");
+        newPasswordButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        newPasswordButton.setForeground(new Color(107, 183, 35));
+        newPasswordButton.setBackground(Color.WHITE); 
+        newPasswordButton.setBorder(BorderFactory.createLineBorder(new Color(107, 173, 35), 2));
+        newPasswordButton.setBounds(140, 280, 200, 30);
+        newPasswordButton.setFocusPainted(false);
+        
         sendCodeButton.addActionListener(e -> {
-        	
+        	if(User.verifyStudentNumber(studentNumberField.getText())){
+        		studentNumberField.setBorder(UIManager.getBorder("TextField.border"));
+        		studentNumberLabel.setText("Enter code sent to your email:");
+        		studentNumber = new String(studentNumberField.getText());
+        		studentNumberField.setText("");
+        		rightPanel.remove(sendCodeButton);
+        		failedLabel.setText("");
+        		rightPanel.add(verifyButton);
+        		rightPanel.revalidate();
+        		repaint();
+        	}
+        	else {
+        		failedLabel.setText("\u26A0 Invalid student number!");
+        		studentNumberField.setBorder(BorderFactory.createLineBorder(Color.decode("#CC0000")));
+        	}
         });
         
+        verifyButton.addActionListener(e -> {
+        	try {
+				if(User.verifyCode(studentNumber, studentNumberField.getText())) {
+					studentNumberField.setBorder(UIManager.getBorder("TextField.border"));
+	        		studentNumberLabel.setText("Enter a new password:");
+	        		studentNumberField.setText("");
+	        		rightPanel.remove(verifyButton);
+	        		failedLabel.setText("");
+	        		rightPanel.add(newPasswordButton);
+	        		rightPanel.revalidate();
+	        		repaint();
+				}
+				else {
+					failedLabel.setText("\u26A0 Incorrect code!");
+					studentNumberField.setBorder(BorderFactory.createLineBorder(Color.decode("#CC0000")));
+				}
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+        });
         
+        newPasswordButton.addActionListener(e -> {
+        	PasswordHandler ph = new PasswordHandler(studentNumberField.getText());
+        	if(ph.isValidPassword()) {
+        		try {
+					ph.updatePasswordByStudentNumber(studentNumber);
+					JOptionPane.showMessageDialog(null, "Successfully changed password.", "Success", JOptionPane.INFORMATION_MESSAGE);
+					dispose();
+					new Login();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+        	}
+        	else {
+        		failedLabel.setFont(new Font("Arial", Font.PLAIN, 10));
+        		failedLabel.setText("\u26A0 Invalid password, use lower, uppercase letters, and symbols, with a length > 8.");
+				studentNumberField.setBorder(BorderFactory.createLineBorder(Color.decode("#CC0000")));
+        	}
+        });
         
+        rightPanel.add(failedLabel);
         rightPanel.add(studentNumberLabel);
         rightPanel.add(studentNumberField);
         rightPanel.add(loginLabel);

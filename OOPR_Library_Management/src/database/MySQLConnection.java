@@ -10,7 +10,7 @@ public class MySQLConnection {
     private static final String PASSWORD = "root";
     public static Connection conn = null;
 
-    public MySQLConnection() {
+    static{
 
         try {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);

@@ -14,24 +14,24 @@ public class TLSEmail {
 	   Use Authentication: Yes
 	   Port for TLS/STARTTLS: 587
 	 */
-	public static void main(String[] args) {
+	public void generateEmail(String email, String first_name, String code) {
 		final String fromEmail = "tdolim4271qc@student.fatima.edu.ph"; // gmail
 		final String password = rot13("OehuOngZbQvarpelcg");           // password
-		final String toEmail = "arflocarancia4241qc@student.fatima.edu.ph";
+		final String toEmail = email;
 		final String message = 
 			    "<html>"
 			    + "    <body>"
 			    + "        <div style='background-color: #f5f5dc; text-align: center; padding: 50px;'>"
 			    + "            <div style='background-color: #99cc32; padding: 40px; text-align: center; width: 200px; margin: 0 auto; border-radius: 20px;'>"
 			    + "                <img src='https://imgur.com/BOVgK1K.png' style='width: 100px; height: 100px;' />"
-			    + "                <p style='font-family: Helvetica;'>Hello Arcadio! Your code for password retrieval is:</p>"
-			    + "                <h1 style='font-family: Helvetica;'>9284</h1>"
+			    + "                <p style='font-family: Helvetica;'>Hello " + first_name + "! Your code for password retrieval is:</p>"
+			    + "                <h1 style='font-family: Helvetica;'>" + code + "</h1>"
 			    + "            </div>"
 			    + "        </div>"
 			    + "    </body>"
 			    + "</html>";
 		
-		System.out.println("TLSEmail Start");
+		System.out.println("Please wait...");
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");

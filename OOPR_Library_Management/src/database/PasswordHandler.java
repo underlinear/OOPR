@@ -2,8 +2,10 @@ package database;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-public class PasswordHandler{
+public class PasswordHandler extends MySQLConnection{
 	
 	private String password;
 	
@@ -73,6 +75,16 @@ public class PasswordHandler{
             // Handle NoSuchAlgorithmException
             e.printStackTrace();
             return null;
+        }
+    }
+	
+	public void updatePasswordByStudentNumber(String studentNumber) throws SQLException {
+        String query = "UPDATE Users SET password = ? WHERE student_number = ?";
+        
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, password);
+            stmt.setString(2, hashPassword());
+            int rowsAffected = stmt.executeUpdate();
         }
     }
 

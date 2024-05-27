@@ -47,6 +47,7 @@ public class TableManager extends MySQLConnection{
 			    + "password VARCHAR(128), "
 			    + "user_type VARCHAR(10 ), "
 			    + "student_number VARCHAR(20), "
+			    + "verification_code VARCHAR(4), "
 			    + "FOREIGN KEY (student_number) REFERENCES Students(student_number)"
 			    + ");";
 		Statement stmt = conn.createStatement();
@@ -158,4 +159,5 @@ public class TableManager extends MySQLConnection{
 		Statement stmt = conn.createStatement();
         stmt.execute(query);
 	}
+	
 }
