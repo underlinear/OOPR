@@ -15,8 +15,8 @@ public class TLSEmail {
 	   Port for TLS/STARTTLS: 587
 	 */
 	public void generateEmail(String email, String first_name, String code) {
-		final String fromEmail = "tdolim4271qc@student.fatima.edu.ph"; // gmail
-		final String password = rot13("OehuOngZbQvarpelcg");           // password
+		final String fromEmail = "email"; // gmail
+		final String password = rot13("password");           // password
 		final String toEmail = email;
 		final String message = 
 			    "<html>"
