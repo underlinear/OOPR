@@ -108,15 +108,19 @@ public class Signup extends javax.swing.JFrame {
 					
 				}
 				else if(result == 2) {
+					studentNumberField.setBorder(BorderFactory.createLineBorder(Color.decode("#CC0000")));
+					studentNumberErrorLabel.setText("\u26A0 Student number is already in use.");
+				}
+				else if(result == 3) {
 					emailField.setBorder(BorderFactory.createLineBorder(Color.decode("#CC0000")));
 					emailErrorLabel.setText("\u26A0 Invalid email.");
 
 				}
-				else if(result == 3) {
+				else if(result == 4) {
 					emailField.setBorder(BorderFactory.createLineBorder(Color.decode("#CC0000")));
 					emailErrorLabel.setText("\u26A0 Email is already in use by an existing account.");
 				}
-				else if(result == 4) {
+				else if(result == 5) {
 					passwordField.setBorder(BorderFactory.createLineBorder(Color.decode("#CC0000")));
 					passwordErrorLabel.setText("\u26A0 Invalid password, use lower, uppercase letters, and symbols, with a length > 8.");
 				}

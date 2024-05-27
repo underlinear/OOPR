@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookRetrieval extends MySQLConnection {
+	
+	// For retrieving books
     // private static final int TOLERANCE_LEVEL = 4; // Adjust this value as needed
     // private String search = "";
 

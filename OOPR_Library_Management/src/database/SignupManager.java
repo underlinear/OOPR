@@ -126,41 +126,50 @@ public class SignupManager extends MySQLConnection{
 	    }
 	    return false;
 	}
+	
+	public boolean isStudentNumberDuplicate(String student_number) throws SQLException {
+	    String query = "SELECT COUNT(*) FROM Users WHERE student_number = ?";
+	    try (PreparedStatement stmt = conn.prepareStatement(query)) {
+	        stmt.setString(1, student_number);
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            return rs.getInt(1) > 0;
+	        }
+	    }
+	    return false;
+	}
 
-    public int signup() throws SQLException {
-    	
-    	PasswordHandler ph = new PasswordHandler(password);
-    	
-    	if (!isStudentNumberExists(student_number)) {
-            return 1;
-        }
-    	
-    	if (!isValidEmail(email)) {
-            return 2;
-        }
-    	
-    	if (isEmailDuplicate(email)) {
-            return 3;
-        }
-    	
-    	if (!ph.isValidPassword()) {
-    		return 4;
-    	}
-    	
-    	
-        
-        String insertQuery = "INSERT INTO Users (email, password, student_number) VALUES (?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(insertQuery)) {
-        	
-        	
-            stmt.setString(1, email);
-            stmt.setString(2, ph.hashPassword());
-            stmt.setString(3, student_number);
-            // stmt.setString(3, full_name);
-            stmt.executeUpdate();
-            return 0;
-        }
-        
-        
-    }
+	public int signup() throws SQLException {
+	    PasswordHandler ph = new PasswordHandler(password);
+
+	    if (!isStudentNumberExists(student_number)) {
+	        return 1; 
+	    }
+
+	    if (isStudentNumberDuplicate(student_number)) {
+	        return 2;
+	    }
+
+	    if (!isValidEmail(email)) {
+	        return 3;
+	    }
+
+	    if (isEmailDuplicate(email)) {
+	        return 4;
+	    }
+
+	    if (!ph.isValidPassword()) {
+	        return 5;
+	    }
+
+	    String insertQuery = "INSERT INTO Users (email, password, student_number, user_type) VALUES (?, ?, ?, ?)";
+	    try (PreparedStatement stmt = conn.prepareStatement(insertQuery)) {
+	        stmt.setString(1, email);
+	        stmt.setString(2, ph.hashPassword());
+	        stmt.setString(3, student_number);
+	        stmt.setString(4, "student");
+	        stmt.executeUpdate();
+	        return 0;
+	    }
+	}
 }

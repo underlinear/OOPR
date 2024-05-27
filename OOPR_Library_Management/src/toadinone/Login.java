@@ -13,6 +13,7 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        setResizable(false);
         setVisible(true); // Make the frame visible
     }
 
@@ -22,6 +23,7 @@ public class Login extends javax.swing.JFrame {
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setPreferredSize(new Dimension(800, 500));
         mainPanel.setLayout(null);
+        
 
         // Right panel
         JPanel rightPanel = new JPanel();
@@ -102,17 +104,26 @@ public class Login extends javax.swing.JFrame {
         passwordField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
         passwordField.setBounds(100, 260, 300, 35);
 
-        JCheckBox rememberCheckBox = new JCheckBox("Remember me");
-        rememberCheckBox.setBounds(97, 310, 200, 50);
-        rememberCheckBox.setFocusPainted(false);
-        rememberCheckBox.setBackground(Color.WHITE);
+        JButton forgotPasswordButton = new JButton("<html><u>Forgot Password?</u></html>");
+        forgotPasswordButton.setBounds(100, 320, 120, 20);
+        forgotPasswordButton.setFocusPainted(false);
+        forgotPasswordButton.setBackground(Color.WHITE);
+        forgotPasswordButton.setForeground(new Color(107, 173, 35));
+        forgotPasswordButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        forgotPasswordButton.setBorder(null);
+        
+        forgotPasswordButton.addActionListener(e -> {
+        	dispose();
+        	new ForgotPassword();
+        });
+        
 
         JButton signInButton = new JButton("SIGN IN");
         signInButton.setFont(new Font("Arial", Font.PLAIN, 14));
         signInButton.setForeground(new Color(107, 183, 35));
         signInButton.setBackground(Color.WHITE); 
         signInButton.setBorder(BorderFactory.createLineBorder(new Color(107, 173, 35), 2));
-        signInButton.setBounds(200, 330, 100, 30);
+        signInButton.setBounds(200, 360, 100, 30);
         signInButton.setFocusPainted(false);
         
         JLabel failedLabel = new JLabel("");
@@ -125,11 +136,16 @@ public class Login extends javax.swing.JFrame {
         	String studentNumber = studentNumberField.getText();
 			String password = new String(passwordField.getPassword());
 			
+			if(studentNumber.equals("admin") && password.equals("admin")) {
+				new System_Management();
+				dispose();
+				return;
+			}
+			
 			
 			LoginManager lm = new LoginManager(studentNumber, password); // lm.login() para i verify
 			
 			try {
-				
 				if( lm.login() == true ) {
 					dispose();
 					new Student_Home_Page();
@@ -155,7 +171,7 @@ public class Login extends javax.swing.JFrame {
         leftPanel.add(passwordLabel);
         leftPanel.add(passwordField);
         leftPanel.add(Box.createVerticalStrut(10));
-        // leftPanel.add(rememberCheckBox);
+        leftPanel.add(forgotPasswordButton);
         leftPanel.add(Box.createVerticalStrut(20));
         leftPanel.add(signInButton);
         leftPanel.add(Box.createVerticalGlue());

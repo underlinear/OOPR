@@ -3,6 +3,7 @@ package toadinone;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -29,6 +30,7 @@ import database.BookRetrieval;
 import database.User;
 import database.Book;
 import database.Borrow;
+import database.Reserve;
 import database.Return;
 import database.VisitPurpose;
 
@@ -40,6 +42,8 @@ public class Student_Home_Page extends JFrame {
     private JPanel currentPanel = null;
 
     public Student_Home_Page() {
+    	 	
+    	setResizable(false);
     	
     	if(!User.isLoggedIn) {
     		this.dispose();
@@ -50,7 +54,7 @@ public class Student_Home_Page extends JFrame {
         this.setLayout(null);
         this.setSize(1000, 700);
         this.setResizable(false);
-        getContentPane().setBackground(Color.GREEN);
+        getContentPane().setBackground(new Color(153, 204, 50));
         
         JPanel topPanel = new JPanel();
         topPanel.setBackground(new Color(0, 150, 0));
@@ -67,7 +71,6 @@ public class Student_Home_Page extends JFrame {
         studentName.setForeground(Color.WHITE);
         studentName.setBounds(130, 7, 500, 50);
 
-        
         JLabel studentSection = new JLabel();
 		try {
 			studentSection.setText(User.getProgramNameByStudentNumber(User.studentNumber));
@@ -269,7 +272,7 @@ public class Student_Home_Page extends JFrame {
                     
                     Borrow b = new Borrow(bookName);
                     if(!b.borrowBook()) {
-                    	JOptionPane.showMessageDialog(null, "This book is unavailable for now.", "Unavailable", JOptionPane.WARNING_MESSAGE);
+                    	JOptionPane.showMessageDialog(null, "The book " + bookName + " is unavailable for now.", "Unavailable", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
@@ -573,10 +576,16 @@ public class Student_Home_Page extends JFrame {
                     selectedDataPanel.add(nameLabel);
                     selectedDataPanel.add(authorLabel);
                     selectedDataPanel.add(dateLabel);
+                    
+                    Reserve reserve = new Reserve();
+                    try {
+						if(!reserve.reserveBooks(bookName))JOptionPane.showMessageDialog(null, new JScrollPane(selectedDataPanel), "Reserved Books", JOptionPane.PLAIN_MESSAGE);
+					} catch (HeadlessException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
                 }
             }
-            
-            JOptionPane.showMessageDialog(null, new JScrollPane(selectedDataPanel), "Selected Books", JOptionPane.PLAIN_MESSAGE);
         });
 
         reserveBooksPanel.add(reserveButton);

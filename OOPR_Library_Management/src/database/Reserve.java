@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Reserve extends MySQLConnection{
-	public void reserveBooks(String title) throws SQLException {
+	public boolean reserveBooks(String title) throws SQLException {
         String bookIDQuery = "SELECT book_id FROM Books WHERE title = ?";
         int bookID = 0;
 
@@ -52,9 +52,11 @@ public class Reserve extends MySQLConnection{
             ps.setDate(4, java.sql.Date.valueOf(reservedUntil));
             ps.executeUpdate();
             ps.close();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 	
 	

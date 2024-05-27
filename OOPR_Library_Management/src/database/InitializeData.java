@@ -82,7 +82,7 @@ public class InitializeData extends MySQLConnection{
 		        "('To Kill a Mockingbird', 'Harper Lee', 10, 10, '1960-07-11', 'Fiction'), " +
 		        "('War and Peace', 'Leo Tolstoy', 15, 15, '1869-01-01', 'Fiction'), " +
 		        "('Wuthering Heights', 'Emily Brontë', 7, 7, '1847-12-01', 'Fiction'), " +
-		        "('You Don’t Know JS', 'Kyle Simpson', 1, 0, '2014-12-28', 'Programming');";
+		        "('You Don’t Know JS', 'Kyle Simpson', 1, 1, '2014-12-28', 'Programming');";
 
 		Statement stmt = conn.createStatement();
 		stmt.execute(query);
@@ -96,7 +96,7 @@ public class InitializeData extends MySQLConnection{
 			    + "('02220004271', 'Trevor James', 'Dolim', 'B', 2, 'YB-2', 1),"
 			    + "('0220-1892-888', 'Noriel Edward', 'Ong', 'L', 2, 'YB-2', 1),"
 			    + "('02220003439', 'Romille', 'Ilaida', 'M', 2, 'YB-2', 1),"
-			    + "('02220010198', 'John Lloyd', 'Torre', NULL, 2, 'YB-2', 1),"
+			    + "('02220010198', 'John Lloyd', 'Torre', ' ', 2, 'YB-2', 1),"
 			    + "('1111', 'Alice', 'Amber', 'A', 1, 'YB-6', 2),"
 			    + "('2222', 'Billy', 'Bob', 'B', 3, 'YB-6', 2),"
 			    + "('3333', 'Charlie', 'Chaplin', 'C', 2, 'YB-1', 3);";
