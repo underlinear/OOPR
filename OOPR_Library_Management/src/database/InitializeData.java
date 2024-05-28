@@ -88,18 +88,18 @@ public class InitializeData extends MySQLConnection{
 		stmt.execute(query);
 		
 		String user = "INSERT INTO Users (email, password, user_type) VALUES"
-					 +"('root@admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin');";
+					 +"('admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin');";
 		stmt.execute(user);
 		
-		String insertQuery = "INSERT INTO Students (student_number, first_name, last_name, middle_name, year_level, section, program_id) VALUES "
-			    + "('02220004241', 'Arcadio', 'Flocarencia Jr.', 'R', 2, 'YB-2', 1),"
-			    + "('02220004271', 'Trevor James', 'Dolim', 'B', 2, 'YB-2', 1),"
-			    + "('0220-1892-888', 'Noriel Edward', 'Ong', 'L', 2, 'YB-2', 1),"
-			    + "('02220003439', 'Romille', 'Ilaida', 'M', 2, 'YB-2', 1),"
-			    + "('02220010198', 'John Lloyd', 'Torre', ' ', 2, 'YB-2', 1),"
-			    + "('1111', 'Alice', 'Amber', 'A', 1, 'YB-6', 2),"
-			    + "('2222', 'Billy', 'Bob', 'B', 3, 'YB-6', 2),"
-			    + "('3333', 'Charlie', 'Chaplin', 'C', 2, 'YB-1', 3);";
+		String insertQuery = "INSERT INTO Students (student_number, first_name, last_name, middle_name, year_level, section, program_id, gender) VALUES "
+			    + "('02220004241', 'Arcadio', 'Flocarencia Jr.', 'R', 2, 'YB-2', 1, 'M'),"
+			    + "('02220004271', 'Trevor James', 'Dolim', 'B', 2, 'YB-2', 1, 'M'),"
+			    + "('0220-1892-888', 'Noriel Edward', 'Ong', 'L', 2, 'YB-2', 1, 'M'),"
+			    + "('02220003439', 'Romille', 'Ilaida', 'M', 2, 'YB-2', 1, 'M'),"
+			    + "('02220010198', 'John Lloyd', 'Torre', ' ', 2, 'YB-2', 1, 'M'),"
+			    + "('1111', 'Alice', 'Amber', 'A', 1, 'YB-6', 2, 'F'),"
+			    + "('2222', 'Billy', 'Bob', 'B', 3, 'YB-6', 2, 'M'),"
+			    + "('3333', 'Charlie', 'Chaplin', 'C', 2, 'YB-1', 3, 'M');";
 		
 		stmt.execute(insertQuery);
 		

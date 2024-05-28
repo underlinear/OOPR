@@ -82,6 +82,7 @@ public class TableManager extends MySQLConnection{
 			    + "year_level INT, "
 			    + "section VARCHAR(10), "
 			    + "program_id INT, "
+			    + "gender VARCHAR(1),"
 			    + "FOREIGN KEY (program_id) REFERENCES Programs(program_id)"
 			    + ");";
 

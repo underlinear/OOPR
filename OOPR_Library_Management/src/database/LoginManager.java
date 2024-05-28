@@ -49,7 +49,7 @@ public class LoginManager extends MySQLConnection {
         	
         	String fullName = lastName + ", " + firstName + " " + middleName;
         	
-        	new User(fullName, rs.getInt("user_id"), true, studentNumber);
+        	new User( firstName,fullName, rs.getInt("user_id"), true, studentNumber);
         	
         }
         

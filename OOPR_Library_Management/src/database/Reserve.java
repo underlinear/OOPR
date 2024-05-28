@@ -58,6 +58,4 @@ public class Reserve extends MySQLConnection{
         }
         return false;
     }
-	
-	
 }

@@ -11,15 +11,10 @@ public class MySQLConnection {
     public static Connection conn = null;
 
     static{
-
         try {
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
-          
-            System.out.print("\t\tConnection Established at jdbc:mysql://localhost:3306/library_management \n");
-            
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);          
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 }

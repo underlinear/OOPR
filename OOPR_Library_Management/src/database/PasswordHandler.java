@@ -82,9 +82,9 @@ public class PasswordHandler extends MySQLConnection{
         String query = "UPDATE Users SET password = ? WHERE student_number = ?";
         
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, password);
-            stmt.setString(2, hashPassword());
-            int rowsAffected = stmt.executeUpdate();
+            stmt.setString(1, hashPassword());
+            stmt.setString(2, studentNumber);
+            stmt.executeUpdate();
         }
     }
 

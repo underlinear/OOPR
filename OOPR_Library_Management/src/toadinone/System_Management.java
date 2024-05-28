@@ -138,12 +138,12 @@ public class System_Management extends JFrame {
         btnPDetails.setText("Personal Details");
         btnPDetails.setBorder(null);
 
-        lblCalendarIcon.setIcon(new ImageIcon(getClass().getResource("Icon/DASHBOARD.png")));
-        lblSMIcon.setIcon(new ImageIcon(getClass().getResource("Icon/SM1.png")));
-        lblTransactionIcon.setIcon(new ImageIcon(getClass().getResource("Icon/TRANSACTION.png")));
-        lblCalIcon.setIcon(new ImageIcon(getClass().getResource("Icon/CALENDAR_1.png")));
-        lblShelvesIcon.setIcon(new ImageIcon(getClass().getResource("Icon/SHELVE.png")));
-        lblPDIcon.setIcon(new ImageIcon(getClass().getResource("Icon/PERSONAL-INFORMATION.png")));
+        lblCalendarIcon.setIcon(new ImageIcon(getClass().getResource("/Icon/DASHBOARD.png")));
+        lblSMIcon.setIcon(new ImageIcon(getClass().getResource("/Icon/SM1.png")));
+        lblTransactionIcon.setIcon(new ImageIcon(getClass().getResource("/Icon/TRANSACTION.png")));
+        lblCalIcon.setIcon(new ImageIcon(getClass().getResource("/Icon/CALENDAR_1.png")));
+        lblShelvesIcon.setIcon(new ImageIcon(getClass().getResource("/Icon/SHELVE.png")));
+        lblPDIcon.setIcon(new ImageIcon(getClass().getResource("/Icon/PERSONAL-INFORMATION.png")));
 
         GroupLayout dstCmpPanelLayout = new GroupLayout(dstCmpPanel);
         dstCmpPanel.setLayout(dstCmpPanelLayout);
@@ -287,7 +287,7 @@ public class System_Management extends JFrame {
         button.setContentAreaFilled(false); // Make the button transparent
         panel.add(button, BorderLayout.SOUTH);
 
-        JLabel logo = new JLabel(new ImageIcon(getClass().getResource("Icon/TOAD.png")), SwingConstants.CENTER);
+        JLabel logo = new JLabel(new ImageIcon(getClass().getResource("/Icon/TOAD.png")), SwingConstants.CENTER);
         panel.add(logo, BorderLayout.NORTH);
 
         return panel;

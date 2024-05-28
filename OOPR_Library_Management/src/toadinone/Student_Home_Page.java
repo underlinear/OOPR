@@ -2,8 +2,12 @@ package toadinone;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -62,9 +66,8 @@ public class Student_Home_Page extends JFrame {
         topPanel.setLayout(null);
 
         JLabel icon = new JLabel();
-        ImageIcon profile = new ImageIcon("profile.png");
-        icon.setIcon(profile);
-        icon.setBounds(0, 0, 50, 50);
+        icon.setIcon(new ImageIcon(getClass().getResource("/Icon/profile.png")));
+        icon.setBounds(50, 20, 50, 50);
 
         JLabel studentName = new JLabel(User.name);
         studentName.setFont(new Font("Arial", Font.BOLD, 26));
@@ -98,7 +101,19 @@ public class Student_Home_Page extends JFrame {
         JLabel sign = new JLabel("|");
         sign.setFont(new Font("Arial", Font.BOLD, 30));
         sign.setForeground(Color.WHITE);
-        sign.setBounds(820, 18, 50, 50);
+        sign.setBounds(890, 18, 50, 50);
+        
+        JButton home = new JButton("Home");
+        home.setFont(new Font("Arial", Font.BOLD, 18));
+        home.setForeground(Color.WHITE);
+        home.setBackground(new Color(0, 150, 0));
+        home.setFocusPainted(false);
+        home.setBorderPainted(false);
+        home.setBounds(780, 18, 150, 50);
+        
+        home.addActionListener(e -> {
+        	home();
+        });
         
         JButton logOut = new JButton("Log Out");
         logOut.setFont(new Font("Arial", Font.BOLD, 18));
@@ -106,7 +121,7 @@ public class Student_Home_Page extends JFrame {
         logOut.setBackground(new Color(0, 150, 0));
         logOut.setFocusPainted(false);
         logOut.setBorderPainted(false);
-        logOut.setBounds(830, 18, 150, 50);
+        logOut.setBounds(870, 18, 150, 50);
         
         logOut.addActionListener(e -> {
         	this.dispose();
@@ -118,6 +133,7 @@ public class Student_Home_Page extends JFrame {
         updateDateTime();
         
         topPanel.add(logOut);
+        topPanel.add(home);
         topPanel.add(sign);
         topPanel.add(studentSection);
         topPanel.add(studentName);
@@ -174,13 +190,48 @@ public class Student_Home_Page extends JFrame {
         Timer timer = new Timer(1000, e -> updateDateTime());
         timer.start();
         
-        borrowBook();
+        home();
     }
 
     private void updateDateTime() {
         LocalDateTime now = LocalDateTime.now();
         dateLabel.setText(dateFormatter.format(now));
         timeLabel.setText(timeFormatter.format(now));
+    }
+    
+    private void home() {
+    	if (currentPanel != null) {
+            this.remove(currentPanel);
+        }
+    	
+    	class HomePanel extends JPanel{
+    		@Override 
+    		protected void paintComponent(Graphics g) {
+    			super.paintComponent(g);
+    			Graphics2D g2d = (Graphics2D) g;		
+    			ImageIcon icon = new ImageIcon(getClass().getResource("/Icon/background.jpg"));
+    	        Image background = icon.getImage();
+    			g2d.drawImage(background, 0, 0, 700, 500, null);
+    			
+    			
+    			
+    			g2d.setColor(Color.WHITE);
+    			g2d.setFont(new Font("Helvetica", Font.BOLD, 40));
+    			g2d.drawString("Welcome back, " + User.firstName.split(" ")[0] + ".", 210, 80);
+
+    			
+    			setBounds(300, 135, 700, 500);
+    		}
+    	}
+    	
+    	HomePanel newPanel = new HomePanel();
+        newPanel.setBounds(300, 135, 700, 500);
+        this.add(newPanel);
+        currentPanel = newPanel;
+
+        this.revalidate();
+        this.repaint();
+    	
     }
     
     private void borrowBook(){
@@ -255,6 +306,11 @@ public class Student_Home_Page extends JFrame {
             JPanel selectedDataPanel = new JPanel();
             selectedDataPanel.setLayout(new GridLayout(0, 1));
             
+            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to borrow?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            
+            if(reply != JOptionPane.YES_OPTION) {
+            	return;
+            }
             for (int i = 0; i < model.getRowCount(); i++) {
                 Boolean isChecked = (Boolean) model.getValueAt(i, 0);
                 if (isChecked != null && isChecked) {
@@ -405,6 +461,12 @@ public class Student_Home_Page extends JFrame {
         searchButton.addActionListener(e -> {
             String searchQuery = searchBar.getText().trim();
             String selectedCategory = (String) categoryComboBox.getSelectedItem();
+            
+            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to borrow?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            
+            if(reply != JOptionPane.YES_OPTION) {
+            	return;
+            }
 
             if (searchQuery.isEmpty() && selectedCategory.equals("ALL")) {
                 sorter.setRowFilter(null);
@@ -536,6 +598,12 @@ public class Student_Home_Page extends JFrame {
         searchButton.addActionListener(e -> {
             String searchQuery = searchBar.getText().trim();
             String selectedCategory = (String) categoryComboBox.getSelectedItem();
+            
+            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to reserve?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            
+            if(reply != JOptionPane.YES_OPTION) {
+            	return;
+            }
 
             if (searchQuery.isEmpty() && selectedCategory.equals("ALL")) {
                 sorter.setRowFilter(null);
@@ -561,6 +629,12 @@ public class Student_Home_Page extends JFrame {
         reserveButton.addActionListener(e -> {
             JPanel selectedDataPanel = new JPanel();
             selectedDataPanel.setLayout(new GridLayout(0, 1));
+            
+            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to reserve this for three days?", "Confirmation", JOptionPane.YES_NO_OPTION);
+            
+            if(reply != JOptionPane.YES_OPTION) {
+            	return;
+            }
 
             for (int i = 0; i < model.getRowCount(); i++) {
                 Boolean isChecked = (Boolean) model.getValueAt(i, 0);

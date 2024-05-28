@@ -12,12 +12,14 @@ public class User extends MySQLConnection{
 	public static int userID;
 	public static boolean isLoggedIn = false;
 	public static String studentNumber;
+	public static String firstName;
 	
-	public User(String name, int userID, boolean isLoggedIn, String studentNumber) {
+	public User(String firstName, String name, int userID, boolean isLoggedIn, String studentNumber) {
 		User.name = name;
 		User.userID = userID;
 		User.isLoggedIn = isLoggedIn;
 		User.studentNumber = studentNumber;
+		User.firstName = firstName;
 	}
 
 	public static String getProgramNameByStudentNumber(String studentNumber) throws SQLException {
