@@ -16,9 +16,12 @@ public class System_Management extends JFrame {
     public System_Management() {
         initComponents();
     }
-    
 
-    private void initComponents() {
+    public JPanel getSystemManagementPanel() {
+        return systemManagementPanel;
+    }
+    
+    public void initComponents() {
         // Initialize components
         setVisible(true);
         setResizable(false);
@@ -93,7 +96,7 @@ public class System_Management extends JFrame {
         navPanel.setBounds(0, 50, 230, 40);
 
         // Dashboard, System Management, and Transaction Panel (dstCmpPanel)
-          dstCmpPanel.setBackground(new java.awt.Color(33, 46, 48));
+        dstCmpPanel.setBackground(new java.awt.Color(33, 46, 48));
 
         btnDashboard.setBackground(new java.awt.Color(33, 46, 48));
         btnDashboard.setFont(new java.awt.Font("SansSerif", Font.BOLD, 14)); 
@@ -121,9 +124,9 @@ public class System_Management extends JFrame {
         btnCalendar.setText("Calendar");
         btnCalendar.setBorder(null);
         btnCalendar.addActionListener(e -> {
-        	dispose();
-        	ELibrarySoft elibsoft = new ELibrarySoft();
-        	elibsoft.calendar();
+            dispose();
+            ELibrarySoft elibsoft = new ELibrarySoft();
+            elibsoft.calendar();
         });
 
         btnShelves.setBackground(new java.awt.Color(33, 46, 48));
@@ -195,9 +198,9 @@ public class System_Management extends JFrame {
                 .addGroup(dstCmpPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(lblPDIcon)
                     .addComponent(btnPDetails, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
-        );
+                .addContainerGap(86, Short.MAX_VALUE)));
         
+
         mainPanel.add(dstCmpPanel);
         dstCmpPanel.setBounds(0, 90, 230, 410);
 
@@ -301,6 +304,3 @@ public class System_Management extends JFrame {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
-
-
-

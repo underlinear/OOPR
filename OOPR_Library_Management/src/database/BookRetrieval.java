@@ -84,7 +84,37 @@ public class BookRetrieval extends MySQLConnection {
         }
         return books;
     }
+    
+    /*
+    
+    public void addBook(Book book) throws SQLException {
+        String query = "INSERT INTO books (title, author) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, book.getTitle());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.executeUpdate();
+        }
+    }
 
+    public void updateBook(Book book) throws SQLException {
+        String query = "UPDATE books SET title = ?, author = ? WHERE id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, book.getTitle());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.setInt(3, book.getId());
+            pstmt.executeUpdate();
+        }
+    }
+
+    public void deleteBook(int id) throws SQLException {
+        String query = "DELETE FROM books WHERE id = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        }
+    }
+	
+	*/
 
     /*
     // Unused

@@ -137,9 +137,9 @@ public class Login extends javax.swing.JFrame {
 			String password = new String(passwordField.getPassword());
 			
 			if(studentNumber.equals("admin") && password.equals("admin")) {
-				new System_Management();
-				dispose();
-				return;
+				ELibrarySoft els = new ELibrarySoft();
+				els.main(null);
+				this.dispose();
 			}
 			
 			

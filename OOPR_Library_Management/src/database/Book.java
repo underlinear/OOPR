@@ -45,4 +45,7 @@ public class Book {
     	return availableQuantity;
     }
     
+    public int getId() {
+    	return book_id;
+    }
 }

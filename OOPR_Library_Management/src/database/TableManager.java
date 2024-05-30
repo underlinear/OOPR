@@ -8,6 +8,7 @@ public class TableManager extends MySQLConnection{
 	public void createAllTables() throws SQLException{
 		createProgramsTable();
 		createStudentsTable();
+		createTransactionsTable();
 		createUsersTable();
 		createBooksTable();
 		createBorrowingsTable();
@@ -22,6 +23,7 @@ public class TableManager extends MySQLConnection{
 	            "DROP TABLE IF EXISTS Borrowings",
 	            "DROP TABLE IF EXISTS Books",
 	            "DROP TABLE IF EXISTS Users",
+	            "DROP TABLE IF EXISTS Transactions",
 	            "DROP TABLE IF EXISTS Students",
 	            "DROP TABLE IF EXISTS Programs",
 	            "DROP TABLE IF EXISTS Books"
@@ -157,6 +159,19 @@ public class TableManager extends MySQLConnection{
 			    + "time_visited DATETIME,"
 			    + "FOREIGN KEY (user_id) REFERENCES Users(user_id)"
 			    + ");";
+		Statement stmt = conn.createStatement();
+        stmt.execute(query);
+	}
+	
+	public void createTransactionsTable() throws SQLException {
+		String query = "CREATE TABLE Transactions ("
+                + "transaction_id INT AUTO_INCREMENT PRIMARY KEY, "
+                + "is_paid BOOLEAN NOT NULL, "
+                + "date_of_transaction DATE, "
+                + "student_number VARCHAR(20), "
+                + "amount_to_be_paid INT NOT NULL, "
+                + "FOREIGN KEY (student_number) REFERENCES Students(student_number)"
+                + ");";
 		Statement stmt = conn.createStatement();
         stmt.execute(query);
 	}

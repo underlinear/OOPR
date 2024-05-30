@@ -103,6 +103,15 @@ public class InitializeData extends MySQLConnection{
 		
 		stmt.execute(insertQuery);
 		
+		String transactionsQuery = "INSERT INTO Transactions (is_paid, date_of_transaction, student_number, amount_to_be_paid) VALUES "
+				+ "(1, '2024-05-01', '02220004271', 100)";
+		
+		String unpaidQuery = "INSERT INTO Transactions (is_paid, student_number, amount_to_be_paid) VALUES"
+				+ "(0, '02220004241', 1000);";
+		
+		stmt.execute(unpaidQuery);
+		
+		stmt.execute(transactionsQuery);
 		
 		System.out.println("works!");
 		}
